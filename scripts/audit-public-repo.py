@@ -17,9 +17,9 @@ ALLOWED_EMAIL_DOMAINS = {
     "example.com",
     "example.org",
     "example.invalid",
-    "github.com",
     "users.noreply.github.com",
 }
+ALLOWED_EMAILS = {"noreply@github.com"}
 SENSITIVE_SUFFIXES = {
     ".cer",
     ".crt",
@@ -92,8 +92,8 @@ def main() -> int:
         if relative != SELF and AUTHORSHIP_TRACES.search(text):
             findings.append(("development-assistant attribution", relative))
 
-        for _, domain in EMAIL.findall(text):
-            if domain.casefold() not in ALLOWED_EMAIL_DOMAINS:
+        for address, domain in EMAIL.findall(text):
+            if address.casefold() not in ALLOWED_EMAILS and domain.casefold() not in ALLOWED_EMAIL_DOMAINS:
                 findings.append(("public email address", relative))
                 break
 
