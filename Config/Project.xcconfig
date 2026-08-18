@@ -1,0 +1,14 @@
+// Public defaults. Override locally in Developer.xcconfig (ignored by Git).
+#include? "Developer.xcconfig"
+
+AIMONITOR_BUNDLE_ID = dev.aimonitor.app
+AIMONITOR_WIDGET_BUNDLE_ID = $(AIMONITOR_BUNDLE_ID).widget
+AIMONITOR_APP_GROUP = group.dev.aimonitor.shared
+AIMONITOR_GITHUB_OWNER = OWNER
+AIMONITOR_GITHUB_REPO = ai-monitor
+AIMONITOR_APP_PROFILE =
+AIMONITOR_WIDGET_PROFILE =
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+MACOSX_DEPLOYMENT_TARGET = 14.0
+SWIFT_VERSION = 5.0
