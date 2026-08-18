@@ -13,7 +13,13 @@ ROOT = Path(__file__).resolve().parent.parent
 SELF = Path(__file__).resolve().relative_to(ROOT).as_posix()
 PUBLIC_AUTHOR = "CocaDeveloper"
 NOREPLY_SUFFIXES = ("@users.noreply.github.com", "@noreply.github.com")
-ALLOWED_EMAIL_DOMAINS = {"example.com", "example.org", "example.invalid", "users.noreply.github.com"}
+ALLOWED_EMAIL_DOMAINS = {
+    "example.com",
+    "example.org",
+    "example.invalid",
+    "github.com",
+    "users.noreply.github.com",
+}
 SENSITIVE_SUFFIXES = {
     ".cer",
     ".crt",
@@ -29,7 +35,7 @@ EMAIL = re.compile(r"(?<![\w.+-])([\w.+-]+@([A-Za-z][A-Za-z0-9.-]*\.[A-Za-z]{2,}
 PRIVATE_HOME = re.compile(r"(?:/Users|/home)/([A-Za-z0-9._-]+)|[A-Za-z]:\\Users\\([A-Za-z0-9._-]+)")
 ALLOWED_HOME_NAMES = {"runner", "shared", "user", "username"}
 TEAM_LITERAL = re.compile(r"(?:DEVELOPMENT_TEAM|TeamIdentifier)\s*[=:]\s*([A-Z0-9]{10})\b")
-ALLOWED_TEAM_PLACEHOLDERS = {"XXXXXXXXXX", "YOURTEAMID", "TEAMIDHERE"}
+ALLOWED_TEAM_PLACEHOLDERS = {"ABCDE12345", "XXXXXXXXXX", "YOURTEAMID", "TEAMIDHERE"}
 PRIVATE_MATERIAL = re.compile(
     r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
     r"|\b(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}"
