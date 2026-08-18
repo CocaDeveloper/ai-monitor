@@ -1,0 +1,9 @@
+// Example release overrides. Keep the real Release.xcconfig local and ignored.
+DEVELOPMENT_TEAM = ABCDE12345
+CODE_SIGN_IDENTITY = Developer ID Application
+ENABLE_HARDENED_RUNTIME = YES
+AIMONITOR_BUNDLE_ID = com.example.AIMonitor
+AIMONITOR_WIDGET_BUNDLE_ID = $(AIMONITOR_BUNDLE_ID).widget
+AIMONITOR_APP_GROUP = group.com.example.AIMonitor
+AIMONITOR_APP_PROFILE = AI Monitor Developer ID
+AIMONITOR_WIDGET_PROFILE = AI Monitor Widget Developer ID

@@ -1,0 +1,1336 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%lld%% left": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% restantes"
+          }
+        }
+      }
+    },
+    "+ Add Account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ Adicionar conta"
+          }
+        }
+      }
+    },
+    "15 minutes": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "15 minutos"
+          }
+        }
+      }
+    },
+    "30 minutes": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 minutos"
+          }
+        }
+      }
+    },
+    "5 minutes": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 minutos"
+          }
+        }
+      }
+    },
+    "60 minutes": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "60 minutos"
+          }
+        }
+      }
+    },
+    "AI MONITOR": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI MONITOR"
+          }
+        }
+      }
+    },
+    "AI Monitor blocked an operation that could change your account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Monitor bloqueou uma operação que poderia alterar sua conta"
+          }
+        }
+      }
+    },
+    "AI Monitor opens the official ChatGPT sign-in page. Your password is never shown to or stored by AI Monitor.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Monitor abre a página oficial de login do ChatGPT. Sua senha nunca é exibida nem armazenada pelo AI Monitor."
+          }
+        }
+      }
+    },
+    "AI Monitor will remove this account and its saved snapshot. The isolated Codex sign-in directory remains on disk until you remove it from Application Support.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Monitor removerá esta conta e o snapshot salvo. O diretório isolado de login do Codex continuará no disco até você removê-lo em Application Support."
+          }
+        }
+      }
+    },
+    "Account name": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nome da conta"
+          }
+        }
+      }
+    },
+    "Accounts": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contas"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar"
+          }
+        }
+      }
+    },
+    "Add Account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar conta"
+          }
+        }
+      }
+    },
+    "Add Codex / OpenAI to begin.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione Codex / OpenAI para começar."
+          }
+        }
+      }
+    },
+    "Advanced": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avançado"
+          }
+        }
+      }
+    },
+    "App Server status: started only during sign-in and refresh.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status do App Server: iniciado somente durante o login e a atualização."
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparência"
+          }
+        }
+      }
+    },
+    "Authentication is required": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É necessário autenticar"
+          }
+        }
+      }
+    },
+    "Available": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disponível"
+          }
+        }
+      }
+    },
+    "Beta": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar"
+          }
+        }
+      }
+    },
+    "Check Again": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar novamente"
+          }
+        }
+      }
+    },
+    "Check for Updates": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar atualizações"
+          }
+        }
+      }
+    },
+    "Check for updates": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar atualizações"
+          }
+        }
+      }
+    },
+    "Choose Save Location…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher local para salvar…"
+          }
+        }
+      }
+    },
+    "Clear cached snapshots": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limpar snapshots em cache"
+          }
+        }
+      }
+    },
+    "Codex / OpenAI": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex / OpenAI"
+          }
+        }
+      }
+    },
+    "Codex CLI": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex CLI"
+          }
+        }
+      }
+    },
+    "Codex CLI not found": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex CLI não encontrado"
+          }
+        }
+      }
+    },
+    "Coming later.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em breve."
+          }
+        }
+      }
+    },
+    "Compact mode": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo compacto"
+          }
+        }
+      }
+    },
+    "Connect Codex": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectar Codex"
+          }
+        }
+      }
+    },
+    "Connect Codex to see limits and reset times here.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecte o Codex para ver aqui os limites e horários de renovação."
+          }
+        }
+      }
+    },
+    "Connect your first account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecte sua primeira conta"
+          }
+        }
+      }
+    },
+    "Connected": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conectado"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuar"
+          }
+        }
+      }
+    },
+    "Could not connect to the provider": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível conectar ao provedor"
+          }
+        }
+      }
+    },
+    "Credit balance is shown only when an official read-only interface is available.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O saldo de créditos só aparece quando existe uma interface oficial disponível somente para leitura."
+          }
+        }
+      }
+    },
+    "Custom MCP": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MCP personalizado"
+          }
+        }
+      }
+    },
+    "Custom MCP connection editing is an advanced beta and is not enabled in this release.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A edição de conexões MCP personalizadas é um beta avançado e não está habilitada nesta versão."
+          }
+        }
+      }
+    },
+    "Dark CRT": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CRT escuro"
+          }
+        }
+      }
+    },
+    "Disconnect": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desconectar"
+          }
+        }
+      }
+    },
+    "Display": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exibição"
+          }
+        }
+      }
+    },
+    "Download Update": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baixar atualização"
+          }
+        }
+      }
+    },
+    "Export Diagnostics": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar diagnóstico"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geral"
+          }
+        }
+      }
+    },
+    "Get Started": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começar"
+          }
+        }
+      }
+    },
+    "It will not include passwords, tokens, API keys, cookies, account IDs, full email addresses, auth.json, private keys, MCP secrets, or URLs containing credentials.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ele não incluirá senhas, tokens, chaves de API, cookies, IDs de conta, endereços de e-mail completos, auth.json, chaves privadas, segredos MCP nem URLs com credenciais."
+          }
+        }
+      }
+    },
+    "Kling": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kling"
+          }
+        }
+      }
+    },
+    "Kling (Beta)": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kling (Beta)"
+          }
+        }
+      }
+    },
+    "Launch at Login": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir ao iniciar sessão"
+          }
+        }
+      }
+    },
+    "Login Cancelled": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Login cancelado"
+          }
+        }
+      }
+    },
+    "Login Failed": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falha no login"
+          }
+        }
+      }
+    },
+    "Login required": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Login necessário"
+          }
+        }
+      }
+    },
+    "Monitor your Codex limits and reset times.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acompanhe os limites e horários de renovação do Codex."
+          }
+        }
+      }
+    },
+    "More providers": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais provedores"
+          }
+        }
+      }
+    },
+    "Never updated": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nunca atualizado"
+          }
+        }
+      }
+    },
+    "No Accounts": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma conta"
+          }
+        }
+      }
+    },
+    "No accounts yet": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma conta ainda"
+          }
+        }
+      }
+    },
+    "No usage data was provided": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum dado de uso foi fornecido"
+          }
+        }
+      }
+    },
+    "Not Connected": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não conectado"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Offline": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline"
+          }
+        }
+      }
+    },
+    "Offline · %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline · %@"
+          }
+        }
+      }
+    },
+    "Only connect a server you trust. AI Monitor shows the endpoint before connecting, stores bearer credentials in Keychain, and automatically calls only read-only usage tools.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecte apenas servidores confiáveis. O AI Monitor mostra o endpoint antes da conexão, armazena credenciais bearer no Keychain e chama automaticamente somente ferramentas de uso aprovadas para leitura."
+          }
+        }
+      }
+    },
+    "Open AI Monitor\nto connect an account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra o AI Monitor\npara conectar uma conta"
+          }
+        }
+      }
+    },
+    "Open AI Monitor to refresh": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra o AI Monitor para atualizar"
+          }
+        }
+      }
+    },
+    "Opening Browser": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrindo o navegador"
+          }
+        }
+      }
+    },
+    "Planned": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejado"
+          }
+        }
+      }
+    },
+    "Preview": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévia"
+          }
+        }
+      }
+    },
+    "Private by default": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privado por padrão"
+          }
+        }
+      }
+    },
+    "Progress bars": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barras de progresso"
+          }
+        }
+      }
+    },
+    "Quit AI Monitor": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair do AI Monitor"
+          }
+        }
+      }
+    },
+    "Reconnect": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconectar"
+          }
+        }
+      }
+    },
+    "Reconnect Required": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconexão necessária"
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar"
+          }
+        }
+      }
+    },
+    "Refresh all accounts": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar todas as contas"
+          }
+        }
+      }
+    },
+    "Refresh interval": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intervalo de atualização"
+          }
+        }
+      }
+    },
+    "Refreshing…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizando…"
+          }
+        }
+      }
+    },
+    "Remove": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover"
+          }
+        }
+      }
+    },
+    "Remove account?": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover conta?"
+          }
+        }
+      }
+    },
+    "Rename": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renomear"
+          }
+        }
+      }
+    },
+    "Rename account": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renomear conta"
+          }
+        }
+      }
+    },
+    "Reset %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renova em %@"
+          }
+        }
+      }
+    },
+    "Reset Today at %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renova hoje às %@"
+          }
+        }
+      }
+    },
+    "Reset Tomorrow at %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renova amanhã às %@"
+          }
+        }
+      }
+    },
+    "Reset in %lldh %lldm": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renova em %lldh %lldmin"
+          }
+        }
+      }
+    },
+    "Reset onboarding": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reiniciar introdução"
+          }
+        }
+      }
+    },
+    "Reset time unavailable": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário de renovação indisponível"
+          }
+        }
+      }
+    },
+    "Retro Beige": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bege retrô"
+          }
+        }
+      }
+    },
+    "Retro, readable, and original.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrô, legível e original."
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvar"
+          }
+        }
+      }
+    },
+    "Save Path": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caminho para salvar"
+          }
+        }
+      }
+    },
+    "See your AI usage, resets and credits from one tiny menu bar monitor.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veja uso, renovações e créditos das suas IAs em um pequeno monitor na barra de menus."
+          }
+        }
+      }
+    },
+    "Set up later": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configurar depois"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
+          }
+        }
+      }
+    },
+    "Show experimental Custom MCP setup": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar configuração experimental de MCP personalizado"
+          }
+        }
+      }
+    },
+    "Show menu bar warning indicator": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar aviso na barra de menus"
+          }
+        }
+      }
+    },
+    "Show reset countdown": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar contagem regressiva da renovação"
+          }
+        }
+      }
+    },
+    "Sign in with ChatGPT": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrar com o ChatGPT"
+          }
+        }
+      }
+    },
+    "Start with Codex / OpenAI. You can add more accounts at any time.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comece com Codex / OpenAI. Você pode adicionar outras contas quando quiser."
+          }
+        }
+      }
+    },
+    "Startup": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicialização"
+          }
+        }
+      }
+    },
+    "Support": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suporte"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
+          }
+        }
+      }
+    },
+    "The file will include exactly:": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O arquivo incluirá exatamente:"
+          }
+        }
+      }
+    },
+    "The provider did not respond in time": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O provedor demorou demais para responder"
+          }
+        }
+      }
+    },
+    "The provider process stopped unexpectedly": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O processo do provedor foi encerrado inesperadamente"
+          }
+        }
+      }
+    },
+    "The provider returned an unreadable response": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O provedor retornou uma resposta ilegível"
+          }
+        }
+      }
+    },
+    "Theme": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        }
+      }
+    },
+    "This provider version is not compatible": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta versão do provedor não é compatível"
+          }
+        }
+      }
+    },
+    "Updated %lldh ago": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizado há %lldh"
+          }
+        }
+      }
+    },
+    "Updated %lldm ago": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizado há %lldmin"
+          }
+        }
+      }
+    },
+    "Updated %llds ago": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizado há %llds"
+          }
+        }
+      }
+    },
+    "Updates": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizações"
+          }
+        }
+      }
+    },
+    "Usage remaining": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uso restante"
+          }
+        }
+      }
+    },
+    "Usage unavailable": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uso indisponível"
+          }
+        }
+      }
+    },
+    "View Release": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver release"
+          }
+        }
+      }
+    },
+    "Waiting for Login": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aguardando login"
+          }
+        }
+      }
+    },
+    "Welcome to AI Monitor": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boas-vindas ao AI Monitor"
+          }
+        }
+      }
+    },
+    "Your AI limits, resets, and credits at a glance.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus limites, renovações e créditos de IA em um só lugar."
+          }
+        }
+      }
+    },
+    "Your accounts stay on this Mac. AI Monitor does not collect your passwords or usage history.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas contas ficam neste Mac. O AI Monitor não coleta senhas nem o seu histórico de uso."
+          }
+        }
+      }
+    },
+    "Login was cancelled": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O login foi cancelado"
+          }
+        }
+      }
+    },
+    "Login failed": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falha no login"
+          }
+        }
+      }
+    },
+    "Could not load your saved accounts. No data was deleted.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível carregar suas contas salvas. Nenhum dado foi apagado."
+          }
+        }
+      }
+    },
+    "Kling’s public documentation does not currently provide a verified read-only credit balance login for this app. The account remains marked Usage unavailable.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A documentação pública do Kling não oferece atualmente um login verificado para consulta do saldo de créditos por este app. A conta continuará marcada como Uso indisponível."
+          }
+        }
+      }
+    },
+    "Last update failed. Showing the previous value.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A última atualização falhou. Exibindo o valor anterior."
+          }
+        }
+      }
+    },
+    "Could not save changes. Your previous data remains on disk.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar as alterações. Seus dados anteriores continuam no disco."
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sobre"
+          }
+        }
+      }
+    },
+    "MIT licensed · No analytics": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licença MIT · Sem analytics"
+          }
+        }
+      }
+    },
+    "Checking…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificando…"
+          }
+        }
+      }
+    },
+    "version unavailable": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "versão indisponível"
+          }
+        }
+      }
+    },
+    "Detected: %@ · %@": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detectado: %@ · %@"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

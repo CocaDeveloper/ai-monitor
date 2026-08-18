@@ -1,0 +1,8 @@
+// Copy to Developer.xcconfig. This file contains no secrets.
+DEVELOPMENT_TEAM = ABCDE12345
+AIMONITOR_BUNDLE_ID = com.example.AIMonitor
+AIMONITOR_WIDGET_BUNDLE_ID = $(AIMONITOR_BUNDLE_ID).widget
+AIMONITOR_APP_GROUP = group.com.example.AIMonitor
+AIMONITOR_GITHUB_OWNER = your-github-name
+AIMONITOR_GITHUB_REPO = ai-monitor
+

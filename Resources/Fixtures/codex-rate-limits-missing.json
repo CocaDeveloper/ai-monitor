@@ -1,0 +1,11 @@
+{
+  "rateLimits": {
+    "limitId": "codex",
+    "limitName": null,
+    "primary": {"usedPercent": null, "windowDurationMins": null, "resetsAt": null},
+    "secondary": null,
+    "rateLimitReachedType": null
+  },
+  "rateLimitsByLimitId": null
+}
+
