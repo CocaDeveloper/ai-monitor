@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Select the latest installed stable Xcode
+        shell: bash
+        run: |
+          set -euo pipefail
+          XCODE_PATH="$(find /Applications -maxdepth 1 -type d -name 'Xcode_*.app' | sort -V | tail -n 1)"
+          if [[ -n "$XCODE_PATH" ]]; then sudo xcode-select -s "$XCODE_PATH/Contents/Developer"; fi
+          xcodebuild -version
+          xcrun swift --version
+
+      - name: Regenerate project and resolve dependencies
+        run: |
+          set -euo pipefail
+          python3 scripts/generate-xcodeproj.py
+          xcodebuild -resolvePackageDependencies -project AI-Monitor.xcodeproj -scheme AI-Monitor
+
+      - name: Build
+        run: |
+          set -o pipefail
+          mkdir -p build-logs
+          ./scripts/build.sh 2>&1 | tee build-logs/build.log
+
+      - name: Test
+        run: |
+          set -o pipefail
+          ./scripts/test.sh 2>&1 | tee build-logs/test.log
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ai-monitor-build-logs-${{ github.run_attempt }}
+          path: build-logs/
+          if-no-files-found: ignore
+          retention-days: 7

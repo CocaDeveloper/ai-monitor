@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="t d">
+<title id="t">AI Monitor original CRT illustration</title><desc id="d">A beige pixel-inspired monitor with a dark screen and green usage bars.</desc>
+<rect x="45" y="35" width="422" height="410" rx="38" fill="#decfa8" stroke="#6f654f" stroke-width="12"/>
+<rect x="78" y="68" width="356" height="286" rx="26" fill="#111512" stroke="#f5e9c9" stroke-width="10"/>
+<rect x="104" y="94" width="304" height="234" rx="16" fill="#090d0b" stroke="#574f3c" stroke-width="5"/>
+<g fill="#7bd340"><rect x="148" y="239" width="22" height="58"/><rect x="182" y="211" width="22" height="86"/><rect x="216" y="181" width="22" height="116"/><rect x="250" y="151" width="22" height="146"/></g>
+<g fill="#435244"><rect x="284" y="201" width="22" height="96"/><rect x="318" y="231" width="22" height="66"/></g>
+<rect x="148" y="139" width="30" height="24" fill="#f6b72d"/><rect x="334" y="139" width="30" height="24" fill="#3f94eb"/>
+<path d="M188 445h136v26H158v-14h30z" fill="#796f54"/><rect x="378" y="382" width="38" height="20" rx="5" fill="#7bd340"/>
+</svg>

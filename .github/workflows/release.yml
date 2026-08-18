@@ -1,0 +1,195 @@
+name: Signed release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: macos-15
+    timeout-minutes: 60
+    environment: release
+    env:
+      ARCHIVE_PATH: ${{ runner.temp }}/AI-Monitor.xcarchive
+      RELEASE_DIR: ${{ github.workspace }}/build/release
+      KEYCHAIN_PATH: ${{ runner.temp }}/aimonitor-release.keychain-db
+    steps:
+      - name: Validate required release inputs
+        shell: bash
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APP_PROVISIONING_PROFILE_BASE64: ${{ secrets.APP_PROVISIONING_PROFILE_BASE64 }}
+          WIDGET_PROVISIONING_PROFILE_BASE64: ${{ secrets.WIDGET_PROVISIONING_PROFILE_BASE64 }}
+          AIMONITOR_BUNDLE_ID: ${{ secrets.AIMONITOR_BUNDLE_ID }}
+          AIMONITOR_APP_GROUP: ${{ secrets.AIMONITOR_APP_GROUP }}
+          NOTARY_KEY_BASE64: ${{ secrets.NOTARY_KEY_BASE64 }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in APPLE_CERTIFICATE_BASE64 APPLE_CERTIFICATE_PASSWORD KEYCHAIN_PASSWORD APPLE_TEAM_ID APP_PROVISIONING_PROFILE_BASE64 WIDGET_PROVISIONING_PROFILE_BASE64 AIMONITOR_BUNDLE_ID AIMONITOR_APP_GROUP NOTARY_KEY_BASE64 NOTARY_KEY_ID NOTARY_ISSUER_ID; do
+            [[ -n "${!name:-}" ]] || missing+=("$name")
+          done
+          if ((${#missing[@]})); then
+            printf 'Release stopped: configure these protected environment secrets: %s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+
+      - name: Check out tagged source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate semantic tag and project version
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          [[ "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { printf 'Tag must match vMAJOR.MINOR.PATCH.\n' >&2; exit 1; }
+          version="$(awk -F ' = ' '/^MARKETING_VERSION = / {print $2}' Config/Project.xcconfig)"
+          [[ "$tag" == "v$version" ]] || { printf 'Tag %s does not match MARKETING_VERSION %s.\n' "$tag" "$version" >&2; exit 1; }
+          grep -Fq "## [$version]" CHANGELOG.md || { printf 'CHANGELOG.md has no section for %s.\n' "$version" >&2; exit 1; }
+
+      - name: Select Xcode and run unsigned tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          XCODE_PATH="$(find /Applications -maxdepth 1 -type d -name 'Xcode_*.app' | sort -V | tail -n 1)"
+          if [[ -n "$XCODE_PATH" ]]; then sudo xcode-select -s "$XCODE_PATH/Contents/Developer"; fi
+          xcodebuild -version
+          python3 scripts/generate-xcodeproj.py
+          ./scripts/test.sh
+
+      - name: Import signing identity and provisioning profiles
+        shell: bash
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          APP_PROVISIONING_PROFILE_BASE64: ${{ secrets.APP_PROVISIONING_PROFILE_BASE64 }}
+          WIDGET_PROVISIONING_PROFILE_BASE64: ${{ secrets.WIDGET_PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          cert="$RUNNER_TEMP/developer-id.p12"
+          app_profile="$RUNNER_TEMP/app.provisionprofile"
+          widget_profile="$RUNNER_TEMP/widget.provisionprofile"
+          printf '%s' "$APPLE_CERTIFICATE_BASE64" | base64 --decode > "$cert"
+          printf '%s' "$APP_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$app_profile"
+          printf '%s' "$WIDGET_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$widget_profile"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$cert" -P "$APPLE_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          for kind in app widget; do
+            source_profile="$RUNNER_TEMP/$kind.provisionprofile"
+            security cms -D -i "$source_profile" > "$RUNNER_TEMP/$kind-profile.plist"
+            uuid="$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$RUNNER_TEMP/$kind-profile.plist")"
+            name="$(/usr/libexec/PlistBuddy -c 'Print :Name' "$RUNNER_TEMP/$kind-profile.plist")"
+            cp "$source_profile" "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.provisionprofile"
+            printf '%s' "$uuid" > "$RUNNER_TEMP/$kind-profile-uuid"
+            printf '%s' "$name" > "$RUNNER_TEMP/$kind-profile-name"
+          done
+
+      - name: Archive signed app and widget
+        shell: bash
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          AIMONITOR_BUNDLE_ID: ${{ secrets.AIMONITOR_BUNDLE_ID }}
+          AIMONITOR_APP_GROUP: ${{ secrets.AIMONITOR_APP_GROUP }}
+        run: |
+          set -euo pipefail
+          app_profile_name="$(cat "$RUNNER_TEMP/app-profile-name")"
+          widget_profile_name="$(cat "$RUNNER_TEMP/widget-profile-name")"
+          cat > Config/Developer.xcconfig <<EOF
+          DEVELOPMENT_TEAM = $APPLE_TEAM_ID
+          CODE_SIGN_STYLE = Manual
+          CODE_SIGN_IDENTITY = Developer ID Application
+          AIMONITOR_BUNDLE_ID = $AIMONITOR_BUNDLE_ID
+          AIMONITOR_WIDGET_BUNDLE_ID = $AIMONITOR_BUNDLE_ID.widget
+          AIMONITOR_APP_GROUP = $AIMONITOR_APP_GROUP
+          AIMONITOR_APP_PROFILE = $app_profile_name
+          AIMONITOR_WIDGET_PROFILE = $widget_profile_name
+          EOF
+          xcodebuild archive -project AI-Monitor.xcodeproj -scheme AI-Monitor -configuration Release \
+            -archivePath "$ARCHIVE_PATH" DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
+            CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY="Developer ID Application" \
+            OTHER_CODE_SIGN_FLAGS="--timestamp" | tee "$RUNNER_TEMP/archive.log"
+          APP_PATH="$ARCHIVE_PATH/Products/Applications/AI Monitor.app"
+          [[ -d "$APP_PATH" ]] || { printf 'Signed app missing from archive.\n' >&2; exit 1; }
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+          codesign --verify --strict --verbose=2 "$APP_PATH/Contents/PlugIns/AI Monitor Widget.appex"
+
+      - name: Create and inspect DMG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RELEASE_DIR"
+          ./scripts/create-dmg.sh --app "$ARCHIVE_PATH/Products/Applications/AI Monitor.app" --output "$RELEASE_DIR/AI-Monitor.dmg"
+          hdiutil verify "$RELEASE_DIR/AI-Monitor.dmg"
+          mount_point="$RUNNER_TEMP/aimonitor-dmg-check"
+          mkdir -p "$mount_point"
+          hdiutil attach -readonly -nobrowse -mountpoint "$mount_point" "$RELEASE_DIR/AI-Monitor.dmg"
+          trap 'hdiutil detach "$mount_point" -quiet || true' EXIT
+          [[ -d "$mount_point/AI Monitor.app" && -L "$mount_point/Applications" ]] || { printf 'DMG contents are incomplete.\n' >&2; exit 1; }
+          unexpected="$(find "$mount_point" -mindepth 1 -maxdepth 1 ! -name 'AI Monitor.app' ! -name 'Applications' ! -name '.background' ! -name '.DS_Store' -print -quit)"
+          [[ -z "$unexpected" ]] || { printf 'Unexpected DMG content: %s\n' "$unexpected" >&2; exit 1; }
+          hdiutil detach "$mount_point" -quiet
+          trap - EXIT
+
+      - name: Notarize, staple, and verify
+        shell: bash
+        env:
+          NOTARY_KEY_BASE64: ${{ secrets.NOTARY_KEY_BASE64 }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          umask 077
+          notary_key="$RUNNER_TEMP/AuthKey_${NOTARY_KEY_ID}.p8"
+          printf '%s' "$NOTARY_KEY_BASE64" | base64 --decode > "$notary_key"
+          xcrun notarytool submit "$RELEASE_DIR/AI-Monitor.dmg" --key "$notary_key" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID" --wait
+          xcrun stapler staple "$RELEASE_DIR/AI-Monitor.dmg"
+          xcrun stapler validate "$RELEASE_DIR/AI-Monitor.dmg"
+          codesign --verify --deep --strict --verbose=2 "$ARCHIVE_PATH/Products/Applications/AI Monitor.app"
+          spctl --assess --type execute --verbose=2 "$ARCHIVE_PATH/Products/Applications/AI Monitor.app"
+          spctl --assess --type open --context context:primary-signature --verbose=2 "$RELEASE_DIR/AI-Monitor.dmg"
+          (cd "$RELEASE_DIR" && shasum -a 256 AI-Monitor.dmg > AI-Monitor.sha256)
+
+      - name: Publish GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$GITHUB_REF_NAME" "$RELEASE_DIR/AI-Monitor.dmg" "$RELEASE_DIR/AI-Monitor.sha256" \
+            --verify-tag --generate-notes --latest --title "AI Monitor ${GITHUB_REF_NAME#v}"
+
+      - name: Remove temporary signing material
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          security delete-keychain "$KEYCHAIN_PATH" >/dev/null 2>&1
+          for kind in app widget; do
+            if [[ -f "$RUNNER_TEMP/$kind-profile-uuid" ]]; then
+              uuid="$(cat "$RUNNER_TEMP/$kind-profile-uuid")"
+              rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/$uuid.provisionprofile"
+            fi
+          done
+          rm -f Config/Developer.xcconfig "$RUNNER_TEMP"/developer-id.p12 "$RUNNER_TEMP"/*.provisionprofile "$RUNNER_TEMP"/*-profile.plist "$RUNNER_TEMP"/AuthKey_*.p8
