@@ -2,6 +2,20 @@ import Foundation
 import XCTest
 
 final class PolicyAndSecurityTests: XCTestCase {
+    func testLocalDeveloperOverridesFollowPublicDefaults() throws {
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let config = try String(
+            contentsOf: repository.appendingPathComponent("Config/Project.xcconfig"),
+            encoding: .utf8
+        )
+        let defaults = try XCTUnwrap(config.range(of: "AIMONITOR_BUNDLE_ID = dev.aimonitor.app"))
+        let override = try XCTUnwrap(config.range(of: "#include? \"Developer.xcconfig\""))
+
+        XCTAssertGreaterThan(override.lowerBound, defaults.lowerBound)
+    }
+
     func testRefreshCooldown() {
         let policy = RefreshPolicy(cooldown: 60)
         let now = Date(timeIntervalSince1970: 100)
