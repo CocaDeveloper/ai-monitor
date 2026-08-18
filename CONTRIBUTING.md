@@ -21,7 +21,6 @@ Do not use a real provider account in automated tests. Use anonymized fixtures a
 3. Preserve the last valid snapshot on refresh failures.
 4. Add tests for optional and unknown fields.
 5. Update user and provider documentation.
-6. Run build, tests, `shellcheck scripts/*.sh`, and a secret scan before submitting.
+6. Run `python3 scripts/audit-public-repo.py`, build, tests, and `shellcheck scripts/*.sh` before submitting.
 
 Provider contributions must follow [docs/creating-a-provider.md](docs/creating-a-provider.md). Security concerns belong in the private process described by [SECURITY.md](SECURITY.md), not public issues.
-

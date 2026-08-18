@@ -19,11 +19,10 @@
 ## Secret and privacy review
 
 ```bash
-git grep -nEi '(sk-[A-Za-z0-9_-]{8,}|BEGIN (RSA|EC|OPENSSH) PRIVATE KEY|client_secret|refresh_token|access_token)' -- ':!LAUNCH_CHECKLIST.md' ':!Tests/**' ':!Resources/Fixtures/**'
-git ls-files | grep -Ei '\.(p12|cer|mobileprovision|provisionprofile|pem|key|env)$' || true
+python3 scripts/audit-public-repo.py
 ```
 
-- [ ] Review all matches manually.
+- [ ] Confirm the public repository audit passes.
 - [ ] Export diagnostics and confirm the disclosure matches the file.
 - [ ] Confirm there is no analytics, hidden network endpoint, credential log, or private account directory.
 
@@ -35,4 +34,3 @@ git ls-files | grep -Ei '\.(p12|cer|mobileprovision|provisionprofile|pem|key|env
 - [ ] Post in relevant communities once, follow their rules, and answer questions.
 
 Never use bots, purchased or exchanged stars, fake accounts, spam, star-gated giveaways, fabricated download/user counts, or invented testimonials. Reliability, memorable design, useful documentation, and respectful support are the growth strategy.
-
