@@ -23,6 +23,17 @@ final class PolicyAndSecurityTests: XCTestCase {
         XCTAssertTrue(generator.contains("\"CODE_SIGN_STYLE\": '\"$(AIMONITOR_CODE_SIGN_STYLE)\"'"))
     }
 
+    func testAppDeclaresUtilitiesCategory() throws {
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let plist = try String(
+            contentsOf: repository.appendingPathComponent("Config/App-Info.plist"),
+            encoding: .utf8
+        )
+        XCTAssertTrue(plist.contains("public.app-category.utilities"))
+    }
+
     func testRefreshCooldown() {
         let policy = RefreshPolicy(cooldown: 60)
         let now = Date(timeIntervalSince1970: 100)
