@@ -14,6 +14,13 @@ final class PolicyAndSecurityTests: XCTestCase {
         let override = try XCTUnwrap(config.range(of: "#include? \"Developer.xcconfig\""))
 
         XCTAssertGreaterThan(override.lowerBound, defaults.lowerBound)
+        XCTAssertTrue(config.contains("AIMONITOR_CODE_SIGN_STYLE = Automatic"))
+
+        let generator = try String(
+            contentsOf: repository.appendingPathComponent("scripts/generate-xcodeproj.py"),
+            encoding: .utf8
+        )
+        XCTAssertTrue(generator.contains("\"CODE_SIGN_STYLE\": '\"$(AIMONITOR_CODE_SIGN_STYLE)\"'"))
     }
 
     func testRefreshCooldown() {

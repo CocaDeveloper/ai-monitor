@@ -183,7 +183,7 @@ project_settings = {
 app_settings = {
     "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
     "CODE_SIGN_ENTITLEMENTS": "Config/AI-Monitor.entitlements",
-    "CODE_SIGN_STYLE": "Automatic",
+    "CODE_SIGN_STYLE": '"$(AIMONITOR_CODE_SIGN_STYLE)"',
     "COMBINE_HIDPI_IMAGES": "YES",
     "ENABLE_HARDENED_RUNTIME": "YES",
     "GENERATE_INFOPLIST_FILE": "NO",
@@ -197,7 +197,7 @@ app_settings = {
 widget_settings = {
     "APPLICATION_EXTENSION_API_ONLY": "YES",
     "CODE_SIGN_ENTITLEMENTS": "Config/AI-MonitorWidget.entitlements",
-    "CODE_SIGN_STYLE": "Automatic",
+    "CODE_SIGN_STYLE": '"$(AIMONITOR_CODE_SIGN_STYLE)"',
     "GENERATE_INFOPLIST_FILE": "NO",
     "INFOPLIST_FILE": "Config/Widget-Info.plist",
     "LD_RUNPATH_SEARCH_PATHS": '"$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks"',
