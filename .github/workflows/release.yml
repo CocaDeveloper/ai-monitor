@@ -18,9 +18,9 @@ jobs:
     timeout-minutes: 60
     environment: release
     env:
-      ARCHIVE_PATH: ${{ runner.temp }}/AI-Monitor.xcarchive
+      ARCHIVE_PATH: ${{ github.workspace }}/build/AI-Monitor.xcarchive
       RELEASE_DIR: ${{ github.workspace }}/build/release
-      KEYCHAIN_PATH: ${{ runner.temp }}/aimonitor-release.keychain-db
+      KEYCHAIN_PATH: ${{ github.workspace }}/build/aimonitor-release.keychain-db
     steps:
       - name: Validate required release inputs
         shell: bash
