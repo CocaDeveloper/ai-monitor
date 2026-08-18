@@ -10,10 +10,17 @@ struct AIMonitorApp: App {
             MenuBarContentView()
                 .environmentObject(environment)
         } label: {
-            MenuBarIconView()
+            MainWindowLauncher()
                 .accessibilityLabel("AI Monitor")
         }
         .menuBarExtraStyle(.window)
+
+        Window("AI Monitor", id: "main") {
+            MenuBarContentView()
+                .environmentObject(environment)
+        }
+        .defaultPosition(.center)
+        .windowResizability(.contentSize)
 
         Settings {
             SettingsView()
@@ -22,3 +29,17 @@ struct AIMonitorApp: App {
     }
 }
 
+private struct MainWindowLauncher: View {
+    @Environment(\.openWindow) private var openWindow
+    @State private var hasOpenedWindow = false
+
+    var body: some View {
+        MenuBarIconView()
+            .task {
+                guard !hasOpenedWindow else { return }
+                hasOpenedWindow = true
+                openWindow(id: "main")
+                NSApp.activate(ignoringOtherApps: true)
+            }
+    }
+}

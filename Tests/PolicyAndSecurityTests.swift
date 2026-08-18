@@ -42,6 +42,25 @@ final class PolicyAndSecurityTests: XCTestCase {
         XCTAssertTrue(plist.contains("public.app-category.utilities"))
     }
 
+    func testAppProvidesVisibleLaunchWindow() throws {
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let app = try String(
+            contentsOf: repository.appendingPathComponent("App/AIMonitorApp.swift"),
+            encoding: .utf8
+        )
+        let delegate = try String(
+            contentsOf: repository.appendingPathComponent("App/AppDelegate.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(app.contains("Window(\"AI Monitor\", id: \"main\")"))
+        XCTAssertTrue(app.contains("openWindow(id: \"main\")"))
+        XCTAssertTrue(delegate.contains("setActivationPolicy(.regular)"))
+        XCTAssertTrue(delegate.contains("applicationShouldHandleReopen"))
+    }
+
     func testRefreshCooldown() {
         let policy = RefreshPolicy(cooldown: 60)
         let now = Date(timeIntervalSince1970: 100)
