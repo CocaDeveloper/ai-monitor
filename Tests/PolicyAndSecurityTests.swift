@@ -22,6 +22,13 @@ final class PolicyAndSecurityTests: XCTestCase {
         )
         XCTAssertTrue(generator.contains("\"CODE_SIGN_STYLE\": '\"$(AIMONITOR_CODE_SIGN_STYLE)\"'"))
         XCTAssertEqual(generator.components(separatedBy: "\"ENABLE_HARDENED_RUNTIME\": \"YES\"").count - 1, 2)
+
+        let releaseWorkflow = try String(
+            contentsOf: repository.appendingPathComponent(".github/workflows/release.yml"),
+            encoding: .utf8
+        )
+        XCTAssertTrue(releaseWorkflow.contains("AIMONITOR_CODE_SIGN_STYLE = Manual"))
+        XCTAssertFalse(releaseWorkflow.contains("\n          CODE_SIGN_STYLE = Manual"))
     }
 
     func testAppDeclaresUtilitiesCategory() throws {

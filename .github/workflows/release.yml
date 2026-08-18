@@ -118,7 +118,7 @@ jobs:
           widget_profile_name="$(cat "$RUNNER_TEMP/widget-profile-name")"
           cat > Config/Developer.xcconfig <<EOF
           DEVELOPMENT_TEAM = $APPLE_TEAM_ID
-          CODE_SIGN_STYLE = Manual
+          AIMONITOR_CODE_SIGN_STYLE = Manual
           CODE_SIGN_IDENTITY = Developer ID Application
           AIMONITOR_BUNDLE_ID = $AIMONITOR_BUNDLE_ID
           AIMONITOR_WIDGET_BUNDLE_ID = $AIMONITOR_BUNDLE_ID.widget
@@ -167,7 +167,14 @@ jobs:
           xcrun stapler staple "$RELEASE_DIR/AI-Monitor.dmg"
           xcrun stapler validate "$RELEASE_DIR/AI-Monitor.dmg"
           codesign --verify --deep --strict --verbose=2 "$ARCHIVE_PATH/Products/Applications/AI Monitor.app"
-          spctl --assess --type execute --verbose=2 "$ARCHIVE_PATH/Products/Applications/AI Monitor.app"
+          mount_point="$RUNNER_TEMP/aimonitor-notarized-check"
+          mkdir -p "$mount_point"
+          hdiutil attach -readonly -nobrowse -mountpoint "$mount_point" "$RELEASE_DIR/AI-Monitor.dmg"
+          trap 'hdiutil detach "$mount_point" -quiet || true' EXIT
+          codesign --verify --deep --strict --verbose=2 "$mount_point/AI Monitor.app"
+          spctl --assess --type execute --verbose=2 "$mount_point/AI Monitor.app"
+          hdiutil detach "$mount_point" -quiet
+          trap - EXIT
           spctl --assess --type open --context context:primary-signature --verbose=2 "$RELEASE_DIR/AI-Monitor.dmg"
           (cd "$RELEASE_DIR" && shasum -a 256 AI-Monitor.dmg > AI-Monitor.sha256)
 
