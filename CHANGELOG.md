@@ -4,6 +4,14 @@ All notable changes will be documented here. The project follows [Semantic Versi
 
 ## [Unreleased]
 
+### Changed
+- Refined the compact retro-computer shell, added an original spectrum mark, reduced the menu-bar panel, and added a persistent Dock visibility option.
+
+### Fixed
+- Keep new accounts temporary until browser authentication succeeds and clean up cancelled sign-in data.
+- Accept current provider credit balances returned as numeric strings.
+- Restore the main window reliably without requiring the Dock icon.
+
 ## [0.1.0] - 2026-08-18
 
 ### Added

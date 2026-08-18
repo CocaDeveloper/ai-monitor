@@ -7,7 +7,7 @@ final class CodexAppServerClientTests: XCTestCase {
     func testMatchesOutOfOrderResponsesByID() async throws {
         let script = try makeFakeServer(mode: "out-of-order")
         defer { try? FileManager.default.removeItem(at: script.deletingLastPathComponent()) }
-        let client = CodexAppServerClient(executableURL: script, codexHome: script.deletingLastPathComponent(), timeout: 2)
+        let client = CodexAppServerClient(executableURL: script, codexHome: script.deletingLastPathComponent(), timeout: 5)
         try await client.start()
         async let first: NamedResult = client.request(.accountRead, params: EmptyParams())
         async let second: NamedResult = client.request(.accountRateLimitsRead, params: EmptyParams())

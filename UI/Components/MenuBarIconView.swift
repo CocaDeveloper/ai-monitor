@@ -2,10 +2,11 @@ import SwiftUI
 
 struct MenuBarIconView: View {
     var body: some View {
-        Image(systemName: "display")
+        Image(systemName: "macwindow")
             .symbolRenderingMode(.monochrome)
-            .font(.system(size: 14, weight: .semibold))
-            .frame(width: 18, height: 16)
+            .font(.system(size: 12, weight: .semibold))
+            .foregroundStyle(.primary)
+            .frame(width: 14, height: 14)
         .accessibilityHidden(true)
     }
 }

@@ -12,6 +12,10 @@ struct GeneralSettingsView: View {
                     get: { launchAtLogin.isEnabled },
                     set: launchAtLogin.setEnabled
                 ))
+                Toggle("Show in Dock", isOn: preference(\.showDockIcon))
+                Text("Turn this off to keep AI Monitor only in the menu bar.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 if let message = launchAtLogin.message { Text(message).font(.caption).foregroundStyle(.secondary) }
             }
             Section("Refresh") {

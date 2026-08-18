@@ -79,6 +79,25 @@ public struct CodexWorkspaceCredits: Codable, Sendable {
     public let hasCredits: Bool?
     public let unlimited: Bool?
     public let balance: Double?
+
+    private enum CodingKeys: String, CodingKey {
+        case hasCredits
+        case unlimited
+        case balance
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        hasCredits = try container.decodeIfPresent(Bool.self, forKey: .hasCredits)
+        unlimited = try container.decodeIfPresent(Bool.self, forKey: .unlimited)
+        if let number = try? container.decode(Double.self, forKey: .balance) {
+            balance = number
+        } else if let text = try? container.decode(String.self, forKey: .balance) {
+            balance = Double(text)
+        } else {
+            balance = nil
+        }
+    }
 }
 
 public struct CodexRateLimit: Codable, Sendable {

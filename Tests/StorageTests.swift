@@ -42,6 +42,12 @@ final class StorageTests: XCTestCase {
         XCTAssertEqual(accounts.sorted { $0.sortOrder < $1.sortOrder }.map(\.displayName), ["First", "Second"])
     }
 
+    func testPreferencesDecodeOlderFilesWithNewDefaults() throws {
+        let data = Data(#"{"refreshIntervalMinutes":15,"showResetCountdown":true,"showWarningIndicator":true,"checkForUpdates":true,"showProgressBars":true,"compactMode":false,"theme":"retroBeige"}"#.utf8)
+        let preferences = try JSONDecoder().decode(AppPreferences.self, from: data)
+        XCTAssertTrue(preferences.showDockIcon)
+    }
+
     private func temporaryDirectory() -> URL {
         FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
     }

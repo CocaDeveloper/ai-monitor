@@ -1330,6 +1330,66 @@
           }
         }
       }
+    },
+    "Sign in before adding this account.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentique-se antes de adicionar esta conta."
+          }
+        }
+      }
+    },
+    "Sign-in was cancelled. No account was added.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O login foi cancelado. Nenhuma conta foi adicionada."
+          }
+        }
+      }
+    },
+    "Waiting for sign-in…": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aguardando login…"
+          }
+        }
+      }
+    },
+    "Show in Dock": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar no Dock"
+          }
+        }
+      }
+    },
+    "Turn this off to keep AI Monitor only in the menu bar.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desative para manter o AI Monitor somente na barra de menus."
+          }
+        }
+      }
+    },
+    "Hide in menu bar": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar na barra de menus"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

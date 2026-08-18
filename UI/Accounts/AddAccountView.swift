@@ -5,13 +5,17 @@ struct AddAccountView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selected: ProviderID?
     @State private var accountName = "Personal"
+    @State private var isConnecting = false
+    @State private var connectionError: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack {
                 Text(selected == .codex ? "Connect Codex" : "Add Account").font(.title2.bold())
                 Spacer()
-                Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction)
+                Button("Cancel") { dismiss() }
+                    .keyboardShortcut(.cancelAction)
+                    .disabled(isConnecting)
             }
 
             if selected == .codex {
@@ -19,12 +23,22 @@ struct AddAccountView: View {
                     .textFieldStyle(.roundedBorder)
                 Text("AI Monitor opens the official ChatGPT sign-in page. Your password is never shown to or stored by AI Monitor.")
                     .font(.callout).foregroundStyle(.secondary)
-                Button("Sign in with ChatGPT") {
-                    environment.addAccount(providerID: .codex, name: "Codex \(accountName)")
-                    dismiss()
+                if let connectionError {
+                    Text(connectionError)
+                        .font(.callout)
+                        .foregroundStyle(DesignTokens.danger)
+                }
+                Button {
+                    Task { await authenticate() }
+                } label: {
+                    HStack(spacing: 8) {
+                        if isConnecting { ProgressView().controlSize(.small) }
+                        Text(isConnecting ? "Waiting for sign-in…" : "Sign in with ChatGPT")
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .keyboardShortcut(.defaultAction)
+                .disabled(isConnecting)
             } else {
                 providerButton(
                     id: .codex,
@@ -55,6 +69,22 @@ struct AddAccountView: View {
         .frame(width: 430, height: 330)
     }
 
+    private func authenticate() async {
+        isConnecting = true
+        connectionError = nil
+        let trimmed = accountName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let displayName = trimmed.isEmpty ? "Codex Personal" : "Codex \(trimmed)"
+        do {
+            try await environment.authenticateAndAddCodex(name: displayName)
+            dismiss()
+        } catch ProviderError.loginCancelled {
+            connectionError = String(localized: "Sign-in was cancelled. No account was added.")
+        } catch {
+            connectionError = error.localizedDescription
+        }
+        isConnecting = false
+    }
+
     private func providerButton(id: ProviderID, title: String, subtitle: String, status: String) -> some View {
         Button {
             if id == .kling {
@@ -77,4 +107,3 @@ struct AddAccountView: View {
         .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
     }
 }
-

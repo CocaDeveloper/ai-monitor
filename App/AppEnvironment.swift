@@ -5,6 +5,7 @@ import WidgetKit
 @MainActor
 final class AppEnvironment: ObservableObject {
     @Published private(set) var state = PersistedState()
+    @Published private(set) var hasLoadedState = false
     @Published var presentedError: String?
     @Published var isRefreshing = false
     @Published var addAccountPresented = false
@@ -28,6 +29,7 @@ final class AppEnvironment: ObservableObject {
         self.isUITesting = scenario != nil
         if let scenario {
             state = Self.uiTestState(scenario)
+            hasLoadedState = true
             if scenario == "error" { presentedError = "Connection failed in test preview." }
         } else {
             Task { await load() }
@@ -40,22 +42,57 @@ final class AppEnvironment: ObservableObject {
         self.sharedStore = SharedSnapshotStore(directory: directory)
         self.isUITesting = true
         self.state = previewState
+        self.hasLoadedState = true
     }
 
     var accounts: [ProviderAccount] { state.accounts.sorted { $0.sortOrder < $1.sortOrder } }
     var preferences: AppPreferences { state.preferences }
 
     func load() async {
+        defer {
+            hasLoadedState = true
+            applyDockVisibility()
+        }
         do { state = try await store.load() }
         catch { presentedError = String(localized: "Could not load your saved accounts. No data was deleted.") }
     }
 
     func updatePreferences(_ mutate: (inout AppPreferences) -> Void) {
+        let showedDockIcon = state.preferences.showDockIcon
         mutate(&state.preferences)
+        if state.preferences.showDockIcon != showedDockIcon { applyDockVisibility() }
         persist()
     }
 
+    func authenticateAndAddCodex(name: String) async throws {
+        let account = ProviderAccount(
+            providerID: .codex,
+            displayName: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Codex Personal" : name,
+            sortOrder: state.accounts.count,
+            status: .waitingForLogin
+        )
+        do {
+            try await provider(for: account).connect(account: account)
+            var authenticated = account
+            authenticated.status = .connected
+            if let details = try? await codexProvider().accountDetails(account: account) {
+                authenticated.emailHint = details.email.map(Self.maskEmail)
+                authenticated.planName = details.planType
+            }
+            state.accounts.append(authenticated)
+            persist()
+            await refresh(accountID: authenticated.id, force: true)
+        } catch {
+            try? await store.removeCodexHome(for: account.id)
+            throw error
+        }
+    }
+
     func addAccount(providerID: ProviderID, name: String) {
+        guard providerID != .codex else {
+            presentedError = String(localized: "Sign in before adding this account.")
+            return
+        }
         let account = ProviderAccount(
             providerID: providerID,
             displayName: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? defaultName(for: providerID) : name,
@@ -64,7 +101,6 @@ final class AppEnvironment: ObservableObject {
         )
         state.accounts.append(account)
         persist()
-        if providerID == .codex { Task { await connect(accountID: account.id) } }
     }
 
     func connect(accountID: UUID) async {
@@ -205,6 +241,10 @@ final class AppEnvironment: ObservableObject {
                 WidgetCenter.shared.reloadAllTimelines()
             } catch { presentedError = String(localized: "Could not save changes. Your previous data remains on disk.") }
         }
+    }
+
+    private func applyDockVisibility() {
+        NSApp.setActivationPolicy(state.preferences.showDockIcon ? .regular : .accessory)
     }
 
     private func defaultName(for providerID: ProviderID) -> String {

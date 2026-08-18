@@ -35,5 +35,12 @@ public actor AccountStore {
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         return root
     }
-}
 
+    public func removeCodexHome(for accountID: UUID) throws {
+        let root = fileURL.deletingLastPathComponent()
+            .appendingPathComponent("CodexAccounts", isDirectory: true)
+            .appendingPathComponent(accountID.uuidString, isDirectory: true)
+        guard FileManager.default.fileExists(atPath: root.path) else { return }
+        try FileManager.default.removeItem(at: root)
+    }
+}

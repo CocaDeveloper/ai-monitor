@@ -57,8 +57,25 @@ final class PolicyAndSecurityTests: XCTestCase {
 
         XCTAssertTrue(app.contains("Window(\"AI Monitor\", id: \"main\")"))
         XCTAssertTrue(app.contains("openWindow(id: \"main\")"))
-        XCTAssertTrue(delegate.contains("setActivationPolicy(.regular)"))
+        XCTAssertTrue(delegate.contains("setActivationPolicy(.accessory)"))
         XCTAssertTrue(delegate.contains("applicationShouldHandleReopen"))
+    }
+
+    func testCodexAccountIsPersistedOnlyAfterAuthentication() throws {
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let environment = try String(
+            contentsOf: repository.appendingPathComponent("App/AppEnvironment.swift"),
+            encoding: .utf8
+        )
+        let method = try XCTUnwrap(environment.range(of: "func authenticateAndAddCodex"))
+        let connect = try XCTUnwrap(environment.range(of: "try await provider(for: account).connect", range: method.lowerBound..<environment.endIndex))
+        let append = try XCTUnwrap(environment.range(of: "state.accounts.append(authenticated)", range: method.lowerBound..<environment.endIndex))
+        let cleanup = try XCTUnwrap(environment.range(of: "removeCodexHome(for: account.id)", range: method.lowerBound..<environment.endIndex))
+
+        XCTAssertLessThan(connect.lowerBound, append.lowerBound)
+        XCTAssertGreaterThan(cleanup.lowerBound, append.lowerBound)
     }
 
     func testRefreshCooldown() {

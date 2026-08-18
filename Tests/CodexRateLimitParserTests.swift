@@ -31,9 +31,14 @@ final class CodexRateLimitParserTests: XCTestCase {
         }
     }
 
+    func testDecodesCreditBalanceReturnedAsString() throws {
+        let data = Data(#"{"rateLimits":{"credits":{"hasCredits":true,"unlimited":false,"balance":"42.5"}}}"#.utf8)
+        let decoded = try JSONDecoder().decode(CodexRateLimitsResult.self, from: data)
+        XCTAssertEqual(decoded.rateLimits?.credits?.balance, 42.5)
+    }
+
     private func fixture(_ name: String) throws -> Data {
         let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: name.replacingOccurrences(of: ".json", with: ""), withExtension: "json"))
         return try Data(contentsOf: url)
     }
 }
-

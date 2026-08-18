@@ -36,7 +36,7 @@ private enum PreviewFixtures {
 }
 
 #Preview("Onboarding") {
-    OnboardingView(hasCompletedOnboarding: .constant(false)).environmentObject(AppEnvironment(previewState: .init())).frame(width: 410, height: 500)
+    OnboardingView(hasCompletedOnboarding: .constant(false)).environmentObject(AppEnvironment(previewState: .init())).frame(width: 360, height: 430)
 }
 
 #Preview("Codex — connected 82%") {

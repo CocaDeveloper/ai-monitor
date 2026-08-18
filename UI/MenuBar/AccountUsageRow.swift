@@ -15,16 +15,22 @@ struct AccountUsageRow: View {
             HStack(alignment: .firstTextBaseline) {
                 statusMark
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(account.displayName).pixelText(size: 15, weight: .semibold).foregroundStyle(.white)
+                    Text(account.displayName)
+                        .pixelText(size: 14, weight: .semibold)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.78)
                     if let plan = account.planName {
                         Text(plan.capitalized).pixelText(size: 10).foregroundStyle(DesignTokens.muted)
                     }
                 }
                 Spacer(minLength: 12)
                 Text(summary)
-                    .pixelText(size: 14, weight: .semibold)
+                    .pixelText(size: 13, weight: .semibold)
                     .foregroundStyle(summaryColor)
                     .multilineTextAlignment(.trailing)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
             }
 
             if showProgress, let percent { ProgressBlocks(percent: percent) }
@@ -33,7 +39,7 @@ struct AccountUsageRow: View {
                 Image(systemName: resetIcon)
                     .font(.caption)
                 Text(detail)
-                    .pixelText(size: 11)
+                    .pixelText(size: 10)
                 Spacer()
                 Button(action: actionableStatus ? onConnect : onRefresh) {
                     Image(systemName: actionableStatus ? "person.crop.circle.badge.plus" : "arrow.clockwise")
@@ -44,7 +50,7 @@ struct AccountUsageRow: View {
             }
             .foregroundStyle(DesignTokens.muted)
         }
-        .padding(.vertical, 11)
+        .padding(.vertical, 9)
         .accessibilityElement(children: .combine)
     }
 

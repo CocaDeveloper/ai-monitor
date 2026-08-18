@@ -1,13 +1,21 @@
 import SwiftUI
 
 struct MenuBarContentView: View {
+    enum Presentation {
+        case menuBar
+        case window
+    }
+
     @EnvironmentObject private var environment: AppEnvironment
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @Environment(\.openSettings) private var openSettings
+    @Environment(\.dismissWindow) private var dismissWindow
     private let onboardingOverride: Bool?
+    private let presentation: Presentation
 
-    init(showOnboarding: Bool? = nil) {
+    init(showOnboarding: Bool? = nil, presentation: Presentation = .menuBar) {
         self.onboardingOverride = showOnboarding
+        self.presentation = presentation
     }
 
     var body: some View {
@@ -18,7 +26,8 @@ struct MenuBarContentView: View {
                 monitor
             }
         }
-        .frame(width: 410, height: (onboardingOverride ?? !hasCompletedOnboarding) ? 500 : environment.preferences.compactMode ? 440 : 510)
+        .frame(width: 360, height: preferredHeight)
+        .background(Color.clear)
         .sheet(isPresented: $environment.addAccountPresented) { AddAccountView() }
         .alert("AI Monitor", isPresented: Binding(
             get: { environment.presentedError != nil },
@@ -76,18 +85,24 @@ struct MenuBarContentView: View {
                 Divider().overlay(DesignTokens.border)
                 HStack(spacing: 8) {
                     Button { environment.addAccountPresented = true } label: {
-                        Label("Add Account", systemImage: "plus")
+                        Label("Add", systemImage: "plus")
                     }
                     .keyboardShortcut("n", modifiers: .command)
                     Button { openSettings() } label: {
                         Label("Settings", systemImage: "gearshape")
                     }
                     Spacer()
-                    Button { NSApp.terminate(nil) } label: {
-                        Image(systemName: "power")
+                    Button {
+                        if presentation == .window {
+                            dismissWindow(id: "main")
+                        } else {
+                            NSApp.terminate(nil)
+                        }
+                    } label: {
+                        Image(systemName: presentation == .window ? "menubar.rectangle" : "power")
                     }
-                    .help("Quit AI Monitor")
-                    .accessibilityLabel("Quit AI Monitor")
+                    .help(presentation == .window ? "Hide in menu bar" : "Quit AI Monitor")
+                    .accessibilityLabel(presentation == .window ? "Hide in menu bar" : "Quit AI Monitor")
                 }
                 .buttonStyle(RetroButtonStyle())
                 .padding(.top, 10)
@@ -100,5 +115,12 @@ struct MenuBarContentView: View {
     private var latestUpdate: String {
         let date = environment.state.snapshots.values.map(\.updatedAt).max()
         return environment.isRefreshing ? String(localized: "Refreshing…") : UsageFormatters.updated(date)
+    }
+
+    private var preferredHeight: CGFloat {
+        if onboardingOverride ?? !hasCompletedOnboarding { return 430 }
+        let visibleRows = min(max(environment.accounts.count, 1), 3)
+        let contentHeight = 250 + CGFloat(visibleRows * (environment.preferences.compactMode ? 62 : 78))
+        return min(environment.preferences.compactMode ? 360 : 430, max(318, contentHeight))
     }
 }
