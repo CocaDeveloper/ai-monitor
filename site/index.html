@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Monitor — AI usage in your Mac menu bar</title>
+  <meta name="description" content="A tiny retro macOS menu bar app for monitoring AI usage, limits, resets, and credits.">
+  <meta name="theme-color" content="#101411">
+  <link rel="canonical" href="https://OWNER.github.io/ai-monitor/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Monitor">
+  <meta property="og:description" content="Limits, resets, and credits in one tiny retro Mac menu bar popup.">
+  <meta property="og:url" content="https://OWNER.github.io/ai-monitor/">
+  <meta property="og:image" content="https://OWNER.github.io/ai-monitor/assets/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav-shell" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="AI Monitor home"><img src="assets/favicon.svg" alt="" width="34" height="34"><span>AI Monitor</span></a>
+    <nav>
+      <a href="#features">Features</a><a href="#providers">Providers</a><a href="support.html">Support</a>
+      <a class="nav-github" data-repo-link href="https://github.com/OWNER/ai-monitor">View on GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">OPEN SOURCE · NATIVE macOS</p>
+        <h1>Stop guessing when your <span>AI limits</span> reset.</h1>
+        <p class="lede">AI subscriptions are hard to track across accounts and services. AI Monitor puts limits, resets, and credits in one tiny retro menu bar popup.</p>
+        <div class="actions">
+          <a class="button primary" data-download-link href="https://github.com/OWNER/ai-monitor/releases/latest/download/AI-Monitor.dmg">Download latest DMG</a>
+          <a class="button secondary" data-repo-link href="https://github.com/OWNER/ai-monitor">Read the source</a>
+        </div>
+        <p class="release-note">Requires macOS 14+. Signed releases will appear on GitHub; until then, build from source.</p>
+      </div>
+      <figure class="preview-wrap">
+        <div class="menu-strip" aria-hidden="true"><span>◫</span><span>⌁</span><span>⌕</span><span>Tue 11:22 AM</span></div>
+        <div class="crt" role="img" aria-label="Design preview of AI Monitor showing Codex usage and provider connection status">
+          <div class="crt-screen">
+            <div class="screen-head"><strong>AI Monitor</strong><span>Updated 34s ago <i></i></span></div>
+            <div class="meter-row green"><b>◆ <span>Codex</span></b><strong>82% left</strong><small>◷ Reset 11:42 PM</small><div class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="meter-row amber"><b>◆ <span>Codex — Work</span></b><strong>31% left</strong><small>◷ Reset tomorrow</small><div class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="meter-row blue"><b>◆ <span>Kling</span></b><strong>Beta</strong><small>⌁ No verified official balance API</small></div>
+            <div class="screen-foot"><span>＋ Add Account</span><span>⌘ Settings</span></div>
+          </div>
+          <div class="crt-base"><span class="power"></span><span class="slot"></span></div>
+        </div>
+        <figcaption>Product design preview — not a release screenshot.</figcaption>
+      </figure>
+    </section>
+
+    <section class="signal" aria-label="Product principles">
+      <div><strong>Private by default</strong><span>No analytics. No account proxy.</span></div>
+      <div><strong>One glance</strong><span>Limits, resets, credits, and stale state.</span></div>
+      <div><strong>Built for the menu bar</strong><span>Native SwiftUI and WidgetKit.</span></div>
+    </section>
+
+    <section class="section" id="features">
+      <p class="eyebrow">THE USEFUL PART</p><h2>A quiet dashboard, always one click away.</h2>
+      <div class="grid features">
+        <article><span aria-hidden="true">▥</span><h3>Multiple accounts</h3><p>Keep personal and work Codex sessions separate with isolated account homes.</p></article>
+        <article><span aria-hidden="true">◷</span><h3>Reset-aware</h3><p>See percentages and reset times without turning raw timestamps into mental math.</p></article>
+        <article><span aria-hidden="true">▦</span><h3>Desktop widgets</h3><p>Small and medium widgets read only a minimal shared snapshot and never start providers.</p></article>
+        <article><span aria-hidden="true">⌁</span><h3>Safe provider boundary</h3><p>A typed interface keeps future integrations honest and makes missing capabilities explicit.</p></article>
+        <article><span aria-hidden="true">◎</span><h3>Accessible retro UI</h3><p>CRT character without tiny targets: keyboard navigation, labels, contrast, and reduced motion.</p></article>
+        <article><span aria-hidden="true">⌘</span><h3>Sanitized diagnostics</h3><p>Export useful troubleshooting context while masking emails, home paths, and secret-like values.</p></article>
+      </div>
+    </section>
+
+    <section class="section providers" id="providers">
+      <p class="eyebrow">PROVIDER STATUS</p><h2>Honest capabilities, not invented integrations.</h2>
+      <div class="provider-table" role="table" aria-label="Provider support status">
+        <div class="table-row header" role="row"><span role="columnheader">Provider</span><span role="columnheader">Status</span><span role="columnheader">What it reads</span></div>
+        <div class="table-row" role="row"><strong role="cell">Codex</strong><span role="cell"><em class="ready">Implemented</em></span><span role="cell">Official local App Server account and rate-limit methods</span></div>
+        <div class="table-row" role="row"><strong role="cell">Mock</strong><span role="cell"><em class="ready">Ready</em></span><span role="cell">Deterministic preview and development data</span></div>
+        <div class="table-row" role="row"><strong role="cell">Kling</strong><span role="cell"><em class="beta">Beta shell</em></span><span role="cell">No official balance API verified; no scraping</span></div>
+        <div class="table-row" role="row"><strong role="cell">Custom MCP</strong><span role="cell"><em class="experimental">Experimental</em></span><span role="cell">Explicitly allowlisted read-only tools only</span></div>
+      </div>
+    </section>
+
+    <section class="section privacy" id="privacy">
+      <div><p class="eyebrow">PRIVACY</p><h2>Your usage stays on your Mac.</h2><p>AI Monitor talks to local provider tooling or explicitly configured endpoints. It does not ship analytics, ads, or a hosted account proxy. Credentials remain under provider control or in Keychain.</p><a href="privacy.html">Read the privacy policy →</a></div>
+      <pre aria-label="Privacy summary"><code>analytics       = false
+ads             = false
+hosted backend  = false
+web scraping    = false
+local snapshot  = minimal</code></pre>
+    </section>
+
+    <section class="section final-cta">
+      <img src="assets/crt-monitor.svg" alt="" width="116" height="116">
+      <h2>One tiny monitor. Fewer surprise limits.</h2>
+      <p>Follow development, audit the code, or help build the next honest provider.</p>
+      <div class="actions"><a class="button primary" data-repo-link href="https://github.com/OWNER/ai-monitor">Explore on GitHub</a><a class="button secondary" href="support.html">Get support</a></div>
+    </section>
+  </main>
+
+  <footer><span>AI Monitor · MIT licensed</span><span><a data-repo-link href="https://github.com/OWNER/ai-monitor">Source</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></span></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>

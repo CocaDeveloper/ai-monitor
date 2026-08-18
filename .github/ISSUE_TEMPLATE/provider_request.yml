@@ -1,0 +1,36 @@
+name: Provider request
+description: Propose an official or authorized usage provider
+title: "[Provider]: "
+labels: [provider]
+body:
+  - type: input
+    id: provider
+    attributes: {label: Provider name}
+    validations: {required: true}
+  - type: input
+    id: official-docs
+    attributes: {label: Official API or MCP documentation URL}
+    validations: {required: true}
+  - type: textarea
+    id: metrics
+    attributes: {label: Available usage data, description: Limits, percentages, credits, reset windows, or other read-only metrics.}
+    validations: {required: true}
+  - type: textarea
+    id: auth
+    attributes: {label: Supported authentication, description: Explain the official login/key flow without sharing credentials.}
+    validations: {required: true}
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access model
+      options: [Public official API, Official MCP server, Local official CLI/server, Partner/private API, Unknown]
+    validations: {required: true}
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: The proposed approach does not scrape websites or bypass access controls.
+          required: true
+        - label: I have not pasted an API key, token, cookie, or private document.
+          required: true

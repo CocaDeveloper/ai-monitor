@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest a focused product improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes: {label: Problem, description: What is difficult today, and for whom?}
+    validations: {required: true}
+  - type: textarea
+    id: outcome
+    attributes: {label: Desired outcome, description: Describe the result rather than only a UI solution.}
+    validations: {required: true}
+  - type: textarea
+    id: alternatives
+    attributes: {label: Alternatives considered}
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Menu bar, Widget, Accounts, Provider, Accessibility, Localization, Design, Documentation, Other]
+    validations: {required: true}
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This request does not require scraping or bypassing a provider's access controls.
+          required: true
+        - label: I searched existing issues and discussions.
+          required: true
