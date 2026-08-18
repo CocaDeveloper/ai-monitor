@@ -21,6 +21,7 @@ final class PolicyAndSecurityTests: XCTestCase {
             encoding: .utf8
         )
         XCTAssertTrue(generator.contains("\"CODE_SIGN_STYLE\": '\"$(AIMONITOR_CODE_SIGN_STYLE)\"'"))
+        XCTAssertEqual(generator.components(separatedBy: "\"ENABLE_HARDENED_RUNTIME\": \"YES\"").count - 1, 2)
     }
 
     func testAppDeclaresUtilitiesCategory() throws {
