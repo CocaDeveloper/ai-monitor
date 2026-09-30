@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SELF = Path(__file__).resolve().relative_to(ROOT).as_posix()
 PUBLIC_AUTHOR = "CocaDeveloper"
+PUBLIC_AUTHOR_EMAILS = {"cocadeveloper@gmail.com"}
 NOREPLY_SUFFIXES = ("@users.noreply.github.com", "@noreply.github.com")
 ALLOWED_EMAIL_DOMAINS = {
     "example.com",
@@ -64,7 +65,10 @@ def tracked_files() -> list[str]:
 def is_public_identity(name: str, email: str) -> bool:
     lowered_name = name.casefold()
     lowered_email = email.casefold()
-    if lowered_name == PUBLIC_AUTHOR.casefold() and lowered_email.endswith(NOREPLY_SUFFIXES):
+    if lowered_name == PUBLIC_AUTHOR.casefold() and (
+        lowered_email.endswith(NOREPLY_SUFFIXES)
+        or lowered_email in {email.casefold() for email in PUBLIC_AUTHOR_EMAILS}
+    ):
         return True
     if lowered_name in {"github", "github actions"} or lowered_name.endswith("[bot]"):
         return lowered_email.endswith(NOREPLY_SUFFIXES) or lowered_email == "noreply@github.com"
