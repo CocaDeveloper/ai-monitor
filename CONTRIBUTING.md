@@ -24,3 +24,7 @@ Do not use a real provider account in automated tests. Use anonymized fixtures a
 6. Run `python3 scripts/audit-public-repo.py`, build, tests, and `shellcheck scripts/*.sh` before submitting.
 
 Provider contributions must follow [docs/creating-a-provider.md](docs/creating-a-provider.md). Security concerns belong in the private process described by [SECURITY.md](SECURITY.md), not public issues.
+
+## Co-authored contributions
+
+When a change is created collaboratively, credit each genuine contributor with GitHub's `Co-authored-by` commit trailer so the repository history reflects the people who worked on it.
