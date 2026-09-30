@@ -10,7 +10,7 @@
 
 A lightweight, local-first macOS menu bar app for viewing AI limits, reset times, connection state, and credits when providers officially expose them.
 
-[![CI workflow configured](https://img.shields.io/badge/CI-workflow%20configured-4f805d)](.github/workflows/ci.yml)
+[![CI](https://github.com/CocaDeveloper/ai-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/CocaDeveloper/ai-monitor/actions/workflows/ci.yml)
 [![Release not published](https://img.shields.io/badge/release-not%20published-7d7360)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-7bd340)](LICENSE)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-3f94eb)](docs/architecture.md)
@@ -67,6 +67,8 @@ Each Codex account gets its own directory:
 ```
 
 AI Monitor starts the official `codex app-server` only during sign-in or refresh, communicates over local standard input/output, and sets a separate `CODEX_HOME` for every account. Views never contain JSON-RPC method strings. The widget reads a safe shared snapshot and never starts provider processes or stores credentials.
+
+For update discovery, AI Monitor uses GitHub's public Releases REST API in a read-only request. See [GitHub integration](docs/github-integration.md) for the endpoint, privacy behavior, and failure handling.
 
 See [architecture](docs/architecture.md), [Codex integration research](docs/integration-research.md), and [privacy](PRIVACY.md).
 
