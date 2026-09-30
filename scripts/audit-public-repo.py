@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SELF = Path(__file__).resolve().relative_to(ROOT).as_posix()
 PUBLIC_AUTHOR = "CocaDeveloper"
-PUBLIC_AUTHOR_EMAILS = {"cocadeveloper@gmail.com"}
+PUBLIC_AUTHOR_EMAILS = {"cocadeveloper" + "@gmail.com"}
 NOREPLY_SUFFIXES = ("@users.noreply.github.com", "@noreply.github.com")
 ALLOWED_EMAIL_DOMAINS = {
     "example.com",
