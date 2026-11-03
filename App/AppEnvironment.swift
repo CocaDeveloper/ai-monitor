@@ -16,6 +16,8 @@ final class AppEnvironment: ObservableObject {
     private var lastAttempts: [UUID: Date] = [:]
     private var failureCounts: [UUID: Int] = [:]
     private let refreshPolicy = RefreshPolicy()
+    // Serialize disk writes so an older snapshot cannot overwrite a newer account change.
+    private var pendingPersistTask: Task<Void, Never>?
     private let isUITesting: Bool
 
     init(store: AccountStore = .init(), sharedStore: SharedSnapshotStore = .init()) {
@@ -234,12 +236,18 @@ final class AppEnvironment: ObservableObject {
     private func persist() {
         let snapshot = SharedWidgetSnapshot.make(accounts: state.accounts, snapshots: state.snapshots)
         let stateToSave = state
-        Task {
+        let previousTask = pendingPersistTask
+        pendingPersistTask = Task { [store, sharedStore] in
+            // AccountStore is an actor, but unstructured Tasks can reach it out of order.
+            // Waiting for the previous write preserves user action order across both stores.
+            await previousTask?.value
             do {
                 try await store.save(stateToSave)
                 try sharedStore.save(snapshot)
                 WidgetCenter.shared.reloadAllTimelines()
-            } catch { presentedError = String(localized: "Could not save changes. Your previous data remains on disk.") }
+            } catch {
+                presentedError = String(localized: "Could not save changes. Your previous data remains on disk.")
+            }
         }
     }
 
