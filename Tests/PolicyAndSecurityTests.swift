@@ -78,6 +78,25 @@ final class PolicyAndSecurityTests: XCTestCase {
         XCTAssertGreaterThan(cleanup.lowerBound, append.lowerBound)
     }
 
+    func testPersistenceWritesAreSerialized() throws {
+        let repository = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let environment = try String(
+            contentsOf: repository.appendingPathComponent("App/AppEnvironment.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(environment.contains("private var pendingPersistTask: Task<Void, Never>?"))
+        XCTAssertTrue(environment.contains("let previousTask = pendingPersistTask"))
+        XCTAssertTrue(environment.contains("await previousTask?.value"))
+        let wait = try XCTUnwrap(environment.range(of: "await previousTask?.value"))
+        let save = try XCTUnwrap(environment.range(of: "try await store.save(stateToSave)"))
+        let snapshot = try XCTUnwrap(environment.range(of: "try sharedStore.save(snapshot)"))
+        XCTAssertLessThan(wait.lowerBound, save.lowerBound)
+        XCTAssertLessThan(save.lowerBound, snapshot.lowerBound)
+    }
+
     func testRefreshCooldown() {
         let policy = RefreshPolicy(cooldown: 60)
         let now = Date(timeIntervalSince1970: 100)
